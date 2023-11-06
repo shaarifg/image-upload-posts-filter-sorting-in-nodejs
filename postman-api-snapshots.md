@@ -1,8 +1,8 @@
 1. CREATE NEW POST
-   ('./api-snapshots/1.create_new_post.png')
+   []('./api-snapshots/1.create_new_post.png')
 
 2. GET ALL POSTS
-   ('./api-snapshots/2.get_all_posts.png')
+   []('./api-snapshots/2.get_all_posts.png')
 
 3. GET FILTERED POSTS BY TITLE AND DESCRIPTION, SORT (ASC OR DESC) LIMIT
    ('./api-snapshots/3.filter_with_title_description_sort_pagination.png')

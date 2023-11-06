@@ -2,9 +2,8 @@
 
 **Table of Contents**
 
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
 - [Libraries Used](#libraries-used)
 - [API Documentation](#api-documentation)
 
@@ -43,3 +42,45 @@ Follow these instructions to set up and run the project on your local machine.
 | `joi`                | Used for request data validation. Joi is a powerful validation library for JavaScript. It is commonly used to validate incoming request data, ensuring that data is properly formatted and meets specific criteria before processing.                                                                   |
 | `mongoose`           | Used for interacting with MongoDB. Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js. It simplifies database interactions, providing a higher-level interface for working with MongoDB databases.                                                                               |
 | `nodemon`            | Used for automatic server restarts during development. Nodemon is a utility that monitors changes in your Node.js application and automatically restarts the server. This is invaluable during development, as it saves time by eliminating the need to manually restart the server after code changes. |
+
+## API Documentation
+
+Here are the available API endpoints with their descriptions and request methods.
+
+| Endpoint        | Description                                   | Request Method |
+| --------------- | --------------------------------------------- | -------------- |
+| `/`             | Home route                                    | `GET`          |
+| `/posts`        | Create a new post and save it to the database | `POST`         |
+| `/posts`        | Get all the posts                             | `GET`          |
+| `/search/posts` | Search posts by title and description         | `GET`          |
+| `/upload`       | Upload an image                               | `POST`         |
+
+### Home Route
+
+- **Endpoint:** `/`
+- **Description:** This is the home route, which provides a simple greeting message.
+- **Request Method:** `GET`
+
+### Create a Post
+
+- **Endpoint:** `/posts`
+- **Description:** Create a new post and save it to the database.
+- **Request Method:** `POST`
+
+### Get All Posts
+
+- **Endpoint:** `/posts`
+- **Description:** Get all the posts stored in the database.
+- **Request Method:** `GET`
+
+### Search Posts
+
+- **Endpoint:** `/search/posts`
+- **Description:** Search for posts using keywords found in the title and description.
+- **Request Method:** `GET`
+
+### Upload Image
+
+- **Endpoint:** `/upload`
+- **Description:** Upload an image to the server or cloud storage (e.g., Cloudinary).
+- **Request Method:** `POST`

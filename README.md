@@ -45,42 +45,52 @@ Follow these instructions to set up and run the project on your local machine.
 
 ## API Documentation
 
-Here are the available API endpoints with their descriptions and request methods.
+Here are the available API endpoints with their descriptions, request methods, example API usage, and response descriptions.
 
-| Endpoint        | Description                                   | Request Method |
-| --------------- | --------------------------------------------- | -------------- |
-| `/`             | Home route                                    | `GET`          |
-| `/posts`        | Create a new post and save it to the database | `POST`         |
-| `/posts`        | Get all the posts                             | `GET`          |
-| `/search/posts` | Search posts by title and description         | `GET`          |
-| `/upload`       | Upload an image                               | `POST`         |
+| Endpoint        | Description                                   | Request Method | Example API                   | Response Description                           |
+| --------------- | --------------------------------------------- | -------------- | ----------------------------- | ---------------------------------------------- |
+| `/`             | Home route                                    | `GET`          | `/`                           | Returns a greeting message.                    |
+| `/posts`        | Create a new post and save it to the database | `POST`         | ` /posts`                     | Creates a new post and returns the saved post. |
+| `/posts`        | Get all the posts                             | `GET`          | `/posts`                      | Returns a list of all posts.                   |
+| `/search/posts` | Search posts by title and description         | `GET`          | `/search/posts?query=keyword` | Searches for posts matching the query keyword. |
+| `/upload`       | Upload an image                               | `POST`         | `/upload`                     | Uploads an image and returns the image URL.    |
 
 ### Home Route
 
 - **Endpoint:** `/`
 - **Description:** This is the home route, which provides a simple greeting message.
 - **Request Method:** `GET`
+- **Example API:** `GET /`
+- **Response Description:** Returns a greeting message.
 
 ### Create a Post
 
 - **Endpoint:** `/posts`
 - **Description:** Create a new post and save it to the database.
 - **Request Method:** `POST`
+- **Example API:** `POST /posts`
+- **Response Description:** Creates a new post and returns the saved post.
 
 ### Get All Posts
 
 - **Endpoint:** `/posts`
 - **Description:** Get all the posts stored in the database.
 - **Request Method:** `GET`
+- **Example API:** `GET /posts`
+- **Response Description:** Returns a list of all posts.
 
 ### Search Posts
 
 - **Endpoint:** `/search/posts`
 - **Description:** Search for posts using keywords found in the title and description.
 - **Request Method:** `GET`
+- **Example API:** `GET /search/posts?query=keyword`
+- **Response Description:** Searches for posts matching the query keyword.
 
 ### Upload Image
 
 - **Endpoint:** `/upload`
 - **Description:** Upload an image to the server or cloud storage (e.g., Cloudinary).
 - **Request Method:** `POST`
+- **Example API:** `POST /upload`
+- **Response Description:** Uploads an image and returns the image URL.

@@ -45,7 +45,7 @@ exports.createPost = async (req, res) => {
 };
 
 /* method to get all the posts
---this controller is supporting filtering, sorting, and pagination
+--this method is supporting filtering, sorting, and pagination
 */
 exports.getAllPosts = async (req, res) => {
   try {
@@ -119,14 +119,14 @@ exports.searchPosts = async (req, res) => {
 
 //controller to filter the posts by tags
 exports.filterPostsByTags = async (req, res) => {
-  const { error } = tagValidation.validate(req.query);
+  const { error } = tagValidation.validate(req.body);
   if (error) {
     return res
       .status(400)
       .json({ message: "Tags Validatin error", error: error.message });
   }
   try {
-    const tags = req.query.tags;
+    const tags = req.body.tags;
 
     const filter = {
       tags: { $in: tags }, // Filter posts with any of the provided tags

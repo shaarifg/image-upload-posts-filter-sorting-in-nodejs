@@ -7,8 +7,6 @@
   - [Installation](#installation)
 - [Libraries Used](#libraries-used)
 - [API Documentation](#api-documentation)
-- [Deployment](#deployment)
-- [License](#license)
 
 ## Getting Started
 
@@ -24,7 +22,17 @@ Follow these instructions to set up and run the project on your local machine.
    git clone https://github.com/your-username/your-repo.git
    ```
 
-## Libraries I used in this project
+2. **To run the code:**
+
+```bash
+   npm install
+```
+
+```bash
+   npm start
+```
+
+## Libraries Used
 
 | Library              | Description                                                                                                                                                                                                                                                                                             |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

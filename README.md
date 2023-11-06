@@ -93,6 +93,4 @@ Here are the available API endpoints with their descriptions, request methods, e
 - **Request Method:** `POST`
 - **Example API:** `POST /upload`
 - **Response Description:** Uploads an image and returns the image URL.
-
-
-hello
+('./api-snapshots/1.create_new_post.png')

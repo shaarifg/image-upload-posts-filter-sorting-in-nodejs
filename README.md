@@ -54,6 +54,15 @@ Here are the available API endpoints with their descriptions, request methods, e
 | `/search/posts` | Search posts by title and description         | `GET`          | `http://localhost:8080/search/posts?search` | Searches for posts matching the search keyword. |
 | `/upload`       | Upload an image                               | `POST`         | `/upload`                     | Uploads an image and returns the image URL.    |
 
+| Endpoint        | Description                                   | Request Method | Example API                                      | Response Description                           |
+| --------------- | --------------------------------------------- | -------------- | -----------------------------                    | ---------------------------------------------- |
+| `/`             | Home route                                    | `GET`          | `/`                                              | Returns a greeting message.                    |
+| `/posts`        | Create a new post and save it to the database | `POST`         | `http://localhost:8080/posts`                     | Creates a new post and returns the saved post. |
+| `/posts`        | Get all the posts                             | `GET`          | `http://localhost:8080/posts`                      | Returns a list of all posts.                   |
+| `/search/posts` | Search posts by title and description         | `GET`          | `http://localhost:8080/search/posts?search`      | Searches for posts matching the search keyword. |
+| `/upload`       | Upload an image                               | `POST`         | `/upload`                                        | Uploads an image and returns the image URL.    |
+| `/tags/posts`       | Filter posts by tags           | `GET`          | `http://localhost:8080/tags/posts?tags[]=coderhttp://localhost:8080/tags/posts?tags[]=coder`    | Filters and returns posts based on specified tags. |
+
 ### Home Route
 
 - **Endpoint:** `/`
@@ -93,3 +102,14 @@ Here are the available API endpoints with their descriptions, request methods, e
 - **Request Method:** `POST`
 - **Example API:** `POST /upload`
 - **Response Description:** Uploads an image and returns the image URL.
+
+Certainly, I've added the "Tab Filter API" to the readme table as follows:
+
+| Endpoint        | Description                                   | Request Method | Example API                                      | Response Description                           |
+| --------------- | --------------------------------------------- | -------------- | -----------------------------                    | ---------------------------------------------- |
+| `/`             | Home route                                    | `GET`          | `/`                                              | Returns a greeting message.                    |
+| `/posts`        | Create a new post and save it to the database | `POST`         | `http://localhost:8080/posts`                     | Creates a new post and returns the saved post. |
+| `/posts`        | Get all the posts                             | `GET`          | `http://localhost:8080/posts`                      | Returns a list of all posts.                   |
+| `/search/posts` | Search posts by title and description         | `GET`          | `http://localhost:8080/search/posts?search`      | Searches for posts matching the search keyword. |
+| `/upload`       | Upload an image                               | `POST`         | `/upload`                                        | Uploads an image and returns the image URL.    |
+| `/tags/posts`       | Filter posts by tags           | `GET`          | `http://localhost:8080/tags/posts?tags[]=coderhttp://localhost:8080/tags/posts?tags[]=coder`    | Filters and returns posts based on specified tags. |

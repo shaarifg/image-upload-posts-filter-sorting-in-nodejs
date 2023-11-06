@@ -16,11 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 //database connection method
 db.createDbConnection();
 
-//complete documentation will be provided on home api
-// let docmentation = "Hello Mohd Sharif, how are you?";
-// app.use("/", (req, res) => {
-//   res.send(docmentation);
-// });
 
 //posts related routes
 const postRoutes = require("./routes/posts.routes");

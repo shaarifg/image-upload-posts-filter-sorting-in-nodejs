@@ -24,7 +24,7 @@ db.createDbConnection();
 
 //posts related routes
 const postRoutes = require("./routes/posts.routes");
-app.use("/api", postRoutes);
+app.use("", postRoutes);
 
 //starting server
 const PORT = process.env.PORT || 8080;

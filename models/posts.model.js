@@ -25,11 +25,6 @@ const postSchema = new mongoose.Schema(
         },
       },
     ],
-    imageUrl: {
-      type: String, // Add a field for the image URL
-    },
-
-    // Add other fields as needed with validation rules
   },
   {
     timestamps: {

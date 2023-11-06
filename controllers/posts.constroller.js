@@ -1,9 +1,12 @@
 require("dotenv").config();
+const { Image, uploadValidation } = require("../models/image.model");
 const { Post, postValidation } = require("../models/posts.model");
 const { searchValidation } = require("../validations/query.validation");
+const { tagValidation } = require("../validations/tags.validation");
 
 const cloudinary = require("cloudinary").v2;
 
+//setting cloudniary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
@@ -21,26 +24,6 @@ exports.createPost = async (req, res) => {
         error: error.message,
       });
     }
-    // let imageUrl = null; // Initialize the imageUrl to null
-    // if (req.files && req.files.image) {
-    //   // Check if an image is provided
-    //   const image = req.files.image;
-    //   if (image.mimetype.startsWith("image/")) {
-    //     // Upload the image to Cloudinary
-    //     try {
-    //       imageUrl = await uploadImageToCloudinary(image);
-    //     } catch (uploadError) {
-    //       return res.status(500).json({
-    //         message: "Image upload to Cloudinary failed",
-    //         error: uploadError,
-    //       });
-    //     }
-    //   } else {
-    //     return res
-    //       .status(400)
-    //       .json({ message: "Uploaded file is not an image" });
-    //   }
-    // }
 
     // creating new post
     const post = new Post({
@@ -61,18 +44,18 @@ exports.createPost = async (req, res) => {
   }
 };
 
-// method to get all the posts
+/* method to get all the posts
+--this controller is supporting filtering, sorting, and pagination
+*/
 exports.getAllPosts = async (req, res) => {
   try {
-    const query = req.query.query || "";
+    //filter with title
+    const query = req.query.filter || "";
     const filter = {
-      $or: [
-        { title: { $regex: new RegExp(query, "i") } },
-        // Add more fields to search as needed
-      ],
+      $or: [{ title: { $regex: new RegExp(query, "i") } }],
     };
 
-    const sort = req.query.sort || "createdAt";
+    const sort = req.query.sort || "created_at";
     const sortOrder = req.query.order || "desc";
 
     const page = parseInt(req.query.page) || 1; // Default to page 1
@@ -86,9 +69,13 @@ exports.getAllPosts = async (req, res) => {
     if (!allPosts || allPosts.length === 0) {
       res.status(200).json({ message: "No posts found" });
     } else {
-      res.status(200).json({ message: "found posts", data: allPosts });
+      const dataLength = allPosts.length;
+      res
+        .status(200)
+        .json({ message: `Found ${dataLength} post(s)`, data: allPosts });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -118,14 +105,26 @@ exports.searchPosts = async (req, res) => {
         return res.status(404).json({ message: "No posts found" });
       }
 
-      res.status(200).json({ message: "Found posts", data: allPosts });
+      //getting length of allPost Array
+      const dataLength = allPosts.length;
+
+      res
+        .status(200)
+        .json({ message: `Found ${dataLength} post(s)`, data: allPosts });
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
   }
 };
 
+//controller to filter the posts by tags
 exports.filterPostsByTags = async (req, res) => {
+  const { error } = tagValidation.validate(req.query);
+  if (error) {
+    return res
+      .status(400)
+      .json({ message: "Tags Validatin error", error: error.message });
+  }
   try {
     const tags = req.query.tags;
 
@@ -140,8 +139,10 @@ exports.filterPostsByTags = async (req, res) => {
         .status(404)
         .json({ message: "No posts found with the specified tags" });
     }
-
-    res.status(200).json({ message: "Found posts", data: allPosts });
+    const dataLength = allPosts.length;
+    res
+      .status(200)
+      .json({ message: `Found ${dataLength} post(s)`, data: allPosts });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
@@ -151,13 +152,15 @@ exports.filterPostsByTags = async (req, res) => {
 --method to upload an image
 ---I am using Cloudinary's free service to get url of uploaded document
 */
-exports.uploadImageToCloudinary = async (req, res) => {
+exports.uploadImage = async (req, res) => {
   try {
     //getting file key, which can be set to anything user wants
     let uploadedImage = null;
+    let imageName = null;
     for (const key in req.files) {
       if (req.files[key].mimetype.startsWith("image/")) {
         uploadedImage = req.files[key];
+        imageName = uploadedImage.name;
         break; // Exit the loop as soon as an image is found
       }
     }
@@ -168,16 +171,40 @@ exports.uploadImageToCloudinary = async (req, res) => {
         .json({ error: "file not found, select a photo to upload" });
     }
 
-    //if file exist uploading it cloud and getting back the url
+    //if file exist then only uploading it cloud and getting back the url to save it database
     const result = await cloudinary.uploader.upload(uploadedImage.tempFilePath);
+    //error handling for upload operations
     if (result.error) {
       console.error(result.error);
       return res.status(500).json({ error: "Image upload failed" });
     }
 
-    res.status(200).json({
-      message: "Image uploaded successfully",
+    const fileType = uploadedImage.mimetype;
+    const fileSize = uploadedImage.size;
+    //saving the image details into the images collexction
+    const image = new Image({
+      title: imageName,
       imageUrl: result.url,
+      fileType: fileType,
+      size: fileSize,
+    });
+
+    // Validationg the image
+    const { error } = uploadValidation.validate({
+      title: imageName,
+      size: fileSize,
+    });
+
+    if (error) {
+      return res.status(400).json({
+        error: "Validation error",
+        message: error.details[0].message,
+      });
+    }
+    const savedImage = await image.save();
+    res.status(200).json({
+      message: "Image uploaded successfully and url saved to database",
+      data: savedImage,
     });
   } catch (error) {
     console.error(error);

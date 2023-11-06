@@ -4,7 +4,8 @@ const {
   createPost,
   getAllPosts,
   searchPosts,
-  uploadImageToCloudinary,
+  uploadImage,
+  filterPostsByTags,
 } = require("../controllers/posts.constroller");
 
 // home route
@@ -16,13 +17,16 @@ router.get("", (req, res) => {
 router.post("/posts", createPost);
 
 //get all the post
+//this api is supporting filtering, sorting, and pagination
 router.get("/posts", getAllPosts);
 
-//post search endpoint-- using title and description of the post
+//posts search endpoint -- using title and description of the post
 router.get("/search/posts", searchPosts);
 
-//route to upload image
+//posts search endpoint -- using tags
+router.get("/tags/posts", filterPostsByTags);
 
-router.post("/upload", uploadImageToCloudinary);
+//route to upload image(documents)
+router.post("/upload", uploadImage);
 
 module.exports = router;

@@ -49,9 +49,9 @@ Here are the available API endpoints with their descriptions, request methods, e
 | Endpoint        | Description                                   | Request Method | Example API                   | Response Description                           |
 | --------------- | --------------------------------------------- | -------------- | ----------------------------- | ---------------------------------------------- |
 | `/`             | Home route                                    | `GET`          | `/`                           | Returns a greeting message.                    |
-| `/posts`        | Create a new post and save it to the database | `POST`         | ` /posts`                     | Creates a new post and returns the saved post. |
-| `/posts`        | Get all the posts                             | `GET`          | `/posts`                      | Returns a list of all posts.                   |
-| `/search/posts` | Search posts by title and description         | `GET`          | `/search/posts?query=keyword` | Searches for posts matching the query keyword. |
+| `/posts`        | Create a new post and save it to the database | `POST`         | `http://localhost:8080/posts`                     | Creates a new post and returns the saved post. |
+| `/posts`        | Get all the posts                             | `GET`          | `http://localhost:8080/posts`                      | Returns a list of all posts.                   |
+| `/search/posts` | Search posts by title and description         | `GET`          | `http://localhost:8080/search/posts?search` | Searches for posts matching the search keyword. |
 | `/upload`       | Upload an image                               | `POST`         | `/upload`                     | Uploads an image and returns the image URL.    |
 
 ### Home Route
@@ -93,4 +93,3 @@ Here are the available API endpoints with their descriptions, request methods, e
 - **Request Method:** `POST`
 - **Example API:** `POST /upload`
 - **Response Description:** Uploads an image and returns the image URL.
-('./api-snapshots/1.create_new_post.png')

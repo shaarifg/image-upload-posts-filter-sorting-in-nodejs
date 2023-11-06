@@ -2,7 +2,6 @@
 
 **Table of Contents**
 
-- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Libraries Used](#libraries-used)
 - [API Documentation](#api-documentation)
